@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 public class Database {
 
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final String SERVICE_ACCOUNT_JSON = "SERVICE_ACCOUNT_JSON";
+    private static final String SERVICE_ACCOUNT_KEY = "SERVICE_ACCOUNT_KEY";
     private static final String DATABASE_URL = "https://wingit-76ee6.firebaseio.com/";
 
     private static Database INSTANCE = null;
@@ -32,10 +32,16 @@ public class Database {
      */
     private Database() {
         try {
-            String serviceAccountJson = Utils.escapeWhitespace(System.getenv(SERVICE_ACCOUNT_JSON));
-            InputStream serviceAccount = new ByteArrayInputStream(serviceAccountJson.getBytes(StandardCharsets.UTF_8));
+
+            String serviceAccountKeyJsonRaw = System.getenv(SERVICE_ACCOUNT_KEY);
+            if (serviceAccountKeyJsonRaw == null) {
+                throw new IOException("SERVICE_ACCOUNT_KEY missing from environment!");
+            }
+            String serviceAccountKeyJson = Utils.escapeWhitespace(serviceAccountKeyJsonRaw);
+
+            InputStream serviceAccountKey = new ByteArrayInputStream(serviceAccountKeyJson.getBytes(StandardCharsets.UTF_8));
             FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccountKey))
                     .setDatabaseUrl(DATABASE_URL)
                     .build();
             FirebaseApp.initializeApp(options);
