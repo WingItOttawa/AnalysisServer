@@ -10,7 +10,7 @@
 
 Note: these instructions are for macOS.
 1. Navigate to your WingIt project folder
-2. Clone the repository from here: https://github.com/WingItOttawa/ServerApp
+2. Clone the repository from here: https://github.com/WingItOttawa/ServerApp.git
 3. (Optional but recommended) Set up Run Configurations in your favourite IDE (see [Running in IntelliJ](#running-in-intellij) for an example)
 
 # Running in IntelliJ
