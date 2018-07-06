@@ -1,6 +1,5 @@
 package com.wingit.analysisserver;
 
-import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
@@ -8,7 +7,6 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -23,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 public class Database {
 
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final String SERVICE_ACCOUNT_JSON = "SERVICE_ACCOUNT_JSON";
     private static final String DATABASE_URL = "https://wingit-76ee6.firebaseio.com/";
 
     private static Database INSTANCE = null;
@@ -33,7 +32,7 @@ public class Database {
      */
     private Database() {
         try {
-            String serviceAccountJson = Utils.escapeWhitespace(System.getenv("SERVICE_ACCOUNT_JSON"));
+            String serviceAccountJson = Utils.escapeWhitespace(System.getenv(SERVICE_ACCOUNT_JSON));
             InputStream serviceAccount = new ByteArrayInputStream(serviceAccountJson.getBytes(StandardCharsets.UTF_8));
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
