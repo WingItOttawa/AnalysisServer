@@ -18,7 +18,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.wingit.serverapp.Main</mainClass>
+                  <mainClass>com.wingit.analysisserver.Main</mainClass>
                 </transformer>
               </transformers>
             </configuration>

@@ -1,4 +1,4 @@
-package com.wingit.serverapp;
+package com.wingit.analysisserver;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

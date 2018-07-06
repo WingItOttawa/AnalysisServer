@@ -1,4 +1,4 @@
-package com.wingit.serverapp;
+package com.wingit.analysisserver;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
