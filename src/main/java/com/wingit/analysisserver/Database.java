@@ -32,13 +32,8 @@ public class Database {
      */
     private Database() {
         try {
-
             String serviceAccountKeyJsonRaw = System.getenv(SERVICE_ACCOUNT_KEY);
-            if (serviceAccountKeyJsonRaw == null) {
-                throw new IOException("SERVICE_ACCOUNT_KEY missing from environment!");
-            }
             String serviceAccountKeyJson = Utils.escapeWhitespace(serviceAccountKeyJsonRaw);
-
             InputStream serviceAccountKey = new ByteArrayInputStream(serviceAccountKeyJson.getBytes(StandardCharsets.UTF_8));
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccountKey))
@@ -47,7 +42,7 @@ public class Database {
             FirebaseApp.initializeApp(options);
             firestore = FirestoreClient.getFirestore();
             LOGGER.info("Successfully initialized Firebase access");
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException e) {
             LOGGER.fatal("Failed to initialize Firebase access", e);
             System.exit(1);
         }
