@@ -41,6 +41,7 @@ public class Database {
             LOGGER.info("Successfully initialized Firebase access");
         } catch (IOException e) {
             LOGGER.fatal("Failed to initialize Firebase access", e);
+            System.exit(1);
         }
     }
 
