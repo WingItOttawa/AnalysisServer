@@ -25,6 +25,7 @@ In both cases, once Run Configurations are set up, you can click the green `Run`
 1. Click on `Edit Configurations` in the top right ![Edit Configurations](./readme-images/editRunConfigurations.png)
 2. Add a new Spring Boot configuration in the top left of the new window by clicking the `+` sign ![Add New Spring Boot Configuration](./readme-images/springBootAddNewConfiguration.png)
 3. Fill in the `Name` and the `Main class` fields as shown ![Spring Boot Configuration](./readme-images/springBootConfiguration.png)
+4. Go to the `Environment variables` field, and add a new variable called `SERVICE_ACCOUNT_KEY`. Copy the contents of `ServiceAccountKey.json` into the value field (obtain this file from another software developer on this project)
 
 ## Running with Maven
 
@@ -33,6 +34,7 @@ In both cases, once Run Configurations are set up, you can click the green `Run`
 3. Fill in the `Name` and the `Command line` fields as shown, then click the `+` sign under the `Before launch:` section at the bottom ![Maven Configuration for Execution](./readme-images/mavenConfiguration.png)
 4. Select `Run Maven Goal` in the new window ![New Maven Goal](./readme-images/mavenAddNewConfiguration2.png)
 5. Fill in the `Command line` field as shown in this image ![Maven Configuration for Packaging](./readme-images/mavenSelectMavenGoal.png)
+6. On the configuration editing window, click on the `Runner` tab, uncheck `Use project settings`, then go to the `Environment variables` field and add a new variable called `SERVICE_ACCOUNT_KEY`. Copy the contents of `ServiceAccountKey.json` into the value field (obtain this file from another software developer on this project)
 
 # Testing the Server
 
