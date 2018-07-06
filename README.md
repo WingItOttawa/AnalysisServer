@@ -2,8 +2,8 @@
 
 - [Project Setup](#project-setup)
 - [Running in IntelliJ](#running-in-intellij)
-    - [First Time Only](#first-time-only)
-    - [Every Time](#every-time)
+    - [Running with Spring Boot](#running-with-spring-boot)
+    - [Running with Maven](#running-with-maven)
 
 
 # Project Setup
@@ -15,14 +15,20 @@ Note: these instructions are for macOS.
 
 # Running in IntelliJ
 
-We are using Maven to manage dependencies and to run this application. We use two commands when building and running: `mvn package` to compile and package the content into a `.jar` file, and `mvn exec:java` to execute the newly packaged `.jar` file. The instructions below show how to set up a quick and easy run configuration so you don't have to type those commands into the command line each time you want to run the server.
+There are two methods that can be used to run this application. We can rely on [Spring Boot](#running-with-spring-boot) to do the job and only use Maven for dependency management, or we can boot using [Maven](#running-with-maven). Either option works, but booting with Spring Boot is much faster and cleaner in the logs. Prefer this option over building and running with Maven.
 
-## First Time Only
+In both cases, once Run Configurations are set up, you can click the green `Run` triangle in the top right of IntelliJ to run the server.
+
+## Running with Spring Boot
+
 1. Click on `Edit Configurations` in the top right ![Edit Configurations](./ReadmeImages/editRunConfigurations.png)
-2. Add a new Maven configuration in the top left of the new window by clicking the `+` sign ![Add New Configuration](./ReadmeImages/addNewConfiguration.png)
-3. Fill in the `Name` and the `Command line` fields as shown in this image, then click the `+` sign under the `Before launch:` section at the bottom ![Maven Configuration for Execution](./ReadmeImages/mavenConfiguration.png)
-4. Select `Run Maven Goal` in the new window ![New Maven Goal](./ReadmeImages/addNewConfiguration2.png)
-5. Fill in the `Command line` field as shown in this image ![Maven Configuration for Packaging](./ReadmeImages/selectMavenGoal.png)
+2. Add a new Spring Boot configuration in the top left of the new window by clicking the `+` sign ![Add New Spring Boot Configuration](./ReadmeImages/springBootAddNewConfiguration.png)
+3. Fill in the `Name` and the `Main class` fields as shown ![Spring Boot Configuration](./ReadmeImages/springBootConfiguration.png)
 
-## Every Time
-1. Click the green `Run` triangle in the top right of IntelliJ!
+## Running with Maven
+
+1. Click on `Edit Configurations` in the top right ![Edit Configurations](./ReadmeImages/editRunConfigurations.png)
+2. Add a new Maven configuration in the top left of the new window by clicking the `+` sign ![Add New Maven Configuration](./ReadmeImages/mavenAddNewConfiguration.png)
+3. Fill in the `Name` and the `Command line` fields as shown, then click the `+` sign under the `Before launch:` section at the bottom ![Maven Configuration for Execution](./ReadmeImages/mavenConfiguration.png)
+4. Select `Run Maven Goal` in the new window ![New Maven Goal](./ReadmeImages/mavenAddNewConfiguration2.png)
+5. Fill in the `Command line` field as shown in this image ![Maven Configuration for Packaging](./ReadmeImages/mavenSelectMavenGoal.png)
