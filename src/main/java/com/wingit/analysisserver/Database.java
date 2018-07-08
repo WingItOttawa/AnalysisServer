@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Singleton class that provides all access to the database
  * @author AveryVine
- * @since 2018-07-05
+ * @since 2018-07-08
  */
 public class Database {
 
@@ -46,6 +46,18 @@ public class Database {
             LOGGER.fatal("Failed to initialize Firebase access", e);
             System.exit(1);
         }
+    }
+
+    public boolean addDocument(Document document) {
+        LOGGER.info("Adding document: " + document.toString());
+        //TODO: add document to database
+        return true;
+    }
+
+    public Document getDocumentByUrl(String url) {
+        LOGGER.info("Getting document by url: " + url);
+        //TODO: retrieve document from database
+        return Document.getSampleDocument();
     }
 
     //This works, but is commented out due to actually being useless data. Leaving it in just for reference, until we get our first working functions that add to the db.
