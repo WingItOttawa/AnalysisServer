@@ -18,7 +18,7 @@ public class WingItController {
      */
     @GetMapping("/ping")
     public ResponseEntity<?> ping() {
-        return ResponseEntity.ok().body("PongTravis");
+        return ResponseEntity.ok().body("Pong");
     }
 
 }
