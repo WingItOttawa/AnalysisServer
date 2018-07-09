@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WingItController {
 
     /**
-     * Tests the connection to the server using ping-pong response
+     * Tests the connection to the server using a ping-pong response
      * @return the word pong
      */
     @GetMapping("/ping")
