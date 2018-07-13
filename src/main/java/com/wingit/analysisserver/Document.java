@@ -1,11 +1,11 @@
 package com.wingit.analysisserver;
 
-import java.util.*;
+import java.util.UUID;
 
 /**
  * Data entity that represents a basic online news article
  * @author AveryVine
- * @since 2018-07-08
+ * @since 2018-07-11
  */
 @SuppressWarnings("unused")
 public class Document {
@@ -22,6 +22,9 @@ public class Document {
      */
     private Document() {}
 
+    /**
+     * Generates a UUID for the document
+     */
     public void generateUUID() {
         id = UUID.randomUUID().toString();
     }

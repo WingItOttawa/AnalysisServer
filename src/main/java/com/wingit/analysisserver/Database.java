@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Singleton class that provides all access to the database
  * @author AveryVine
- * @since 2018-07-08
+ * @since 2018-07-11
  */
 public class Database {
 
@@ -64,6 +64,11 @@ public class Database {
         }
     }
 
+    /**
+     * Adds a document to the database
+     * @param document the document to be added
+     * @return a boolean variable indicating whether adding the document was successful or not
+     */
     public boolean addDocument(Document document) {
         LOGGER.info("Adding document: " + document.toString());
         if (document.getId() == null) {
@@ -71,6 +76,7 @@ public class Database {
         }
 
         //TODO - this should be changed to go through the filter database first
+        //TODO - add some rules to try to overwrite existing documents properly
         ApiFuture<WriteResult> result = db.collection(Collections.MASTER.collection).document(document.getId()).set(document);
         try {
             LOGGER.info("Added document: " + document.toString() + "(at " + result.get().getUpdateTime() + ")");
@@ -82,6 +88,11 @@ public class Database {
         return true;
     }
 
+    /**
+     * Retrieves a document from the database by url
+     * @param url the url of the document to retrieve
+     * @return the document with matching url
+     */
     public Document getDocumentByUrl(String url) {
         LOGGER.info("Getting document by url: " + url);
         CollectionReference collection = db.collection(Collections.MASTER.collection);

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Entry class for REST interactions with the server
  * @author AveryVine
- * @since 2018-07-06
+ * @since 2018-07-11
  */
 @RestController
 public class WingItController {
