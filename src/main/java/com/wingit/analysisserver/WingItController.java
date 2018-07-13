@@ -69,7 +69,6 @@ public class WingItController {
     public ResponseEntity<?> getDocumentByUrl(@RequestParam(value = "url", defaultValue = "") String url) {
         if (url != null) {
             Document document = DATABASE.getDocumentByUrl(url);
-            LOGGER.info(document.toString());
             return ResponseEntity.ok().body(document);
         }
         return ResponseEntity.badRequest().body("Invalid parameters");

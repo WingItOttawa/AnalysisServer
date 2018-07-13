@@ -1,38 +1,33 @@
 package com.wingit.analysisserver;
 
+import java.util.*;
+
 /**
  * Data entity that represents a basic online news article
  * @author AveryVine
  * @since 2018-07-08
  */
+@SuppressWarnings("unused")
 public class Document {
 
+    private String id;
     private String title;
     private String url;
     private String content;
     private String wing;
-    private double wingValue;
+    private Double wingValue;
 
     /**
-     * Constructor required by Spring for converting from a JSON string to a Document object
+     * Constructor required for POJO deserialization by both Spring and Firebase
      */
-    @SuppressWarnings("unused")
     private Document() {}
 
-    /**
-     * Constructs a complete Document object
-     * @param title the title of the document
-     * @param url the url of the document
-     * @param content the content of the document
-     * @param wing the political leaning of the document, anywhere from "far-left" to "far-right"
-     * @param wingValue the political leaning of the document as a number between 0 and 100, with 0 being furthest left and 100 being furthest right
-     */
-    public Document(String title, String url, String content, String wing, double wingValue) {
-        this.title = title;
-        this.url = url;
-        this.content = content;
-        this.wing = wing;
-        this.wingValue = wingValue;
+    public void generateUUID() {
+        id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -51,17 +46,27 @@ public class Document {
         return wing;
     }
 
-    public double getWingValue() {
+    public Double getWingValue() {
         return wingValue;
     }
 
-    public static Document getSampleDocument() {
-        return new Document("Document title", "www.example.com/test", "This is the content", "centrist", 50);
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Document)) {
+            return false;
+        }
+        Document d = (Document) o;
+        return d.getId() != null && d.getId().equals(id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     @Override
     public String toString() {
-        return "\nDOCUMENT ->\n\tTitle: " + title + "\n\tContent: " + content + "\n\tURL: " + url + "\n\tWing: " + wing + "\n\tWing Value: " + wingValue + "\n";
+        return "\nDOCUMENT ->\n\tID: " + id + "\n\tTitle: " + title + "\n\tURL: " + url + "\n\tContent: " + content + "\n\tWing: " + wing + "\n\tWing Value: " + wingValue + "\n";
     }
 
 }

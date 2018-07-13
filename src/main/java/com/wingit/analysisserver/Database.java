@@ -1,7 +1,8 @@
 package com.wingit.analysisserver;
 
+import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -12,6 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Singleton class that provides all access to the database
@@ -25,7 +28,20 @@ public class Database {
     private static final String DATABASE_URL = "https://wingit-76ee6.firebaseio.com/";
 
     private static Database INSTANCE = null;
-    private static Firestore firestore = null;
+    private static Firestore db = null;
+
+    private enum Collections {
+        MASTER("master"),
+        FILTER("filter"),
+        WORD_FREQUENCY("word-frequency"),
+        WING_PROBABILITY("wing-probability");
+
+        private final String collection;
+
+        Collections(String collection) {
+            this.collection = collection;
+        }
+    }
 
     /**
      * Initializes the database by establishing a connection to Firebase/Firestore
@@ -40,7 +56,7 @@ public class Database {
                     .setDatabaseUrl(DATABASE_URL)
                     .build();
             FirebaseApp.initializeApp(options);
-            firestore = FirestoreClient.getFirestore();
+            db = FirestoreClient.getFirestore();
             LOGGER.info("Successfully initialized Firebase access");
         } catch (IOException | IllegalArgumentException e) {
             LOGGER.fatal("Failed to initialize Firebase access", e);
@@ -50,43 +66,40 @@ public class Database {
 
     public boolean addDocument(Document document) {
         LOGGER.info("Adding document: " + document.toString());
-        //TODO: add document to database
+        if (document.getId() == null) {
+            document.generateUUID();
+        }
+
+        //TODO - this should be changed to go through the filter database first
+        ApiFuture<WriteResult> result = db.collection(Collections.MASTER.collection).document(document.getId()).set(document);
+        try {
+            LOGGER.info("Added document: " + document.toString() + "(at " + result.get().getUpdateTime() + ")");
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.error("Something went wrong when adding document with id " + document.getId(), e);
+            return false;
+        }
+
         return true;
     }
 
     public Document getDocumentByUrl(String url) {
         LOGGER.info("Getting document by url: " + url);
-        //TODO: retrieve document from database
-        return Document.getSampleDocument();
+        CollectionReference collection = db.collection(Collections.MASTER.collection);
+        Query query = collection.whereEqualTo("url", url).limit(1);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        try {
+            List<QueryDocumentSnapshot> docs = querySnapshot.get().getDocuments();
+            if (docs.size() > 0) {
+                Document document = docs.get(0).toObject(Document.class);
+                LOGGER.info("Found document: " + document.toString());
+                return document;
+            }
+            return null;
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.error("Something went wrong when getting document with url " + url);
+            return null;
+        }
     }
-
-    //This works, but is commented out due to actually being useless data. Leaving it in just for reference, until we get our first working functions that add to the db.
-//    public static void addDataTest() {
-//
-//        DocumentReference docRef = firestore.collection("test").document("alovelace");
-//        // Add document data  with id "alovelace" using a hashmap
-//        Map<String, Object> data = new HashMap<String, Object>();
-//        data.put("first", "Ada");
-//        data.put("last", "Lovelace");
-//        data.put("born", 1815);
-//        //asynchronously write data
-//        ApiFuture<WriteResult> result = docRef.set(data);
-//        // ...
-//        // result.get() blocks on response
-//        //System.out.println("Result : " + result.get().toString());
-//
-//
-//        DocumentReference docRef2 = firestore.collection("test").document("aturing");
-//        // Add document data with an additional field ("middle")
-//        Map<String, Object> data2 = new HashMap<String, Object>();
-//        data.put("first", "Alan");
-//        data.put("middle", "Mathison");
-//        data.put("last", "Turing");
-//        data.put("born", 1912);
-//
-//        ApiFuture<WriteResult> result2 = docRef.set(data);
-//        //System.out.println("Update time : " + result2.get().getUpdateTime());
-//    }
 
     /**
      * Provides access to the database (thread-safe)
