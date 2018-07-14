@@ -71,9 +71,6 @@ public class Database {
      */
     public boolean addDocument(Document document) {
         LOGGER.info("Adding document: " + document.toString());
-        if (document.getId() == null) {
-            document.generateUUID();
-        }
 
         //TODO - this should be changed to go through the filter database first
         //TODO - add some rules to try to overwrite existing documents properly

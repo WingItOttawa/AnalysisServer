@@ -23,32 +23,52 @@ public class Document {
     private Document() {}
 
     /**
-     * Generates a UUID for the document
+     * Retrieves the UUID of the document. If there isn't one, the UUID is generated
+     * @return the UUID of the document
      */
-    public void generateUUID() {
-        id = UUID.randomUUID().toString();
-    }
-
     public String getId() {
+        if (id == null) {
+            id = UUID.randomUUID().toString();
+        }
         return id;
     }
 
+    /**
+     * Retrieves the title of the document
+     * @return the title of the document
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Retrieves the URL of the document
+     * @return the URL of the document
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Retrieves the content of the document
+     * @return the content of the document
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * Retrieves the political leaning of the document
+     * @return the political leaning of the document
+     */
     public String getWing() {
         return wing;
     }
 
+    /**
+     * Retrieves the political leaning value of the document
+     * @return the political leaning value of the document
+     */
     public Double getWingValue() {
         return wingValue;
     }
