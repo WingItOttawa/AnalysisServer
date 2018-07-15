@@ -14,7 +14,7 @@ public class Document {
     private String title;
     private String url;
     private String content;
-    private String wing;
+    private Wing wing;
     private Double wingValue;
 
     /**
@@ -61,7 +61,7 @@ public class Document {
      * Retrieves the political leaning of the document
      * @return the political leaning of the document
      */
-    public String getWing() {
+    public Wing getWing() {
         return wing;
     }
 
