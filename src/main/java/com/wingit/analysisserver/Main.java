@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 
-    private static final Database DATABASE = Database.getInstance();
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
