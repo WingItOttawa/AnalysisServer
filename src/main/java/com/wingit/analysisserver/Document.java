@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * Data entity that represents a basic online news article
  * @author AveryVine
- * @since 2018-07-11
+ * @since 2018-07-15
  */
 @SuppressWarnings("unused")
 public class Document {

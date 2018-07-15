@@ -3,6 +3,11 @@ package com.wingit.analysisserver;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Enum that represents the different political leanings a document can have
+ * @author AveryVine
+ * @since 2018-07-15
+ */
 public enum Wing {
     FAR_LEFT("far-left"),
     MODERATE_LEFT("moderate-left"),
@@ -12,6 +17,10 @@ public enum Wing {
 
     private final String value;
 
+    /**
+     * Constructs a Wing enum to be a part of the persistent set
+     * @param value the string value of the enum
+     */
     Wing(String value) {
         this.value = value;
     }
