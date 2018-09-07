@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Entry class for REST interactions with the server
+ *
  * @author AveryVine
- * @since 2018-07-11
+ * @since July 2018
  */
 @RestController
 public class WingItController {
@@ -28,6 +29,7 @@ public class WingItController {
 
     /**
      * Logs the method and URI of all incoming requests to the server
+     *
      * @param request the incoming HTTP request
      */
     @ModelAttribute
@@ -37,6 +39,7 @@ public class WingItController {
 
     /**
      * Tests the connection to the server using a ping-pong response
+     *
      * @return the word pong
      */
     @GetMapping("/ping")
@@ -46,6 +49,7 @@ public class WingItController {
 
     /**
      * Adds a single document to the database
+     *
      * @param document the document to be added
      * @return a 200 response
      */
@@ -62,6 +66,7 @@ public class WingItController {
 
     /**
      * Retrieves a single document from the database by its URL
+     *
      * @param url the URL of the document to retrieve
      * @return the retrieved document
      */
