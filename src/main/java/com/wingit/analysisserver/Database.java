@@ -103,11 +103,7 @@ public class Database {
             return false;
         }
 
-        List<Document> documents = getDocumentsInFilterCollection();
-        if (documents.size() >= FilterCollectionProcessor.MAX_DOCS_IN_FILTER) {
-            documents = filterCollectionProcessor.cleanDocuments(documents);
-            transferDocuments(documents);
-        }
+        filterCollectionProcessor.processDocuments();
 
         return true;
     }

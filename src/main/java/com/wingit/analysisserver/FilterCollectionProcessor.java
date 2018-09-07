@@ -16,9 +16,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class FilterCollectionProcessor {
 
-    public static int MAX_DOCS_IN_FILTER = 100;
-    public static int PROCESS_TIMER_IN_MINUTES = 1;
-    public static long PROCESS_TIMER_IN_MILLIS = TimeUnit.MINUTES.toMillis(PROCESS_TIMER_IN_MINUTES);
+    private static int MAX_DOCS_IN_FILTER = 100;
+    private static int PROCESS_TIMER_IN_MINUTES = 1;
+    private static long PROCESS_TIMER_IN_MILLIS = TimeUnit.MINUTES.toMillis(PROCESS_TIMER_IN_MINUTES);
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static FilterCollectionProcessor INSTANCE = null;
@@ -48,6 +48,17 @@ public class FilterCollectionProcessor {
         long delay = PROCESS_TIMER_IN_MILLIS;
         long period = PROCESS_TIMER_IN_MILLIS;
         timer.scheduleAtFixedRate(repeatedTask, delay, period);
+    }
+
+    /**
+     * Processes the documents in the filter collection, assuming there are enough
+     */
+    public void processDocuments() {
+        List<Document> documents = Database.getInstance().getDocumentsInFilterCollection();
+        if (documents.size() >= MAX_DOCS_IN_FILTER) {
+            documents = cleanDocuments(documents);
+            Database.getInstance().transferDocuments(documents);
+        }
     }
 
     /**
