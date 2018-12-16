@@ -4,8 +4,9 @@ import java.util.UUID;
 
 /**
  * Data entity that represents a basic online news article
+ *
  * @author AveryVine
- * @since 2018-07-15
+ * @since July 2018
  */
 @SuppressWarnings("unused")
 public class Document {
@@ -20,10 +21,12 @@ public class Document {
     /**
      * Constructor required for POJO deserialization by both Spring and Firebase
      */
-    private Document() {}
+    private Document() {
+    }
 
     /**
      * Retrieves the UUID of the document. If there isn't one, the UUID is generated
+     *
      * @return the UUID of the document
      */
     public String getId() {
@@ -35,6 +38,7 @@ public class Document {
 
     /**
      * Retrieves the title of the document
+     *
      * @return the title of the document
      */
     public String getTitle() {
@@ -43,6 +47,7 @@ public class Document {
 
     /**
      * Retrieves the URL of the document
+     *
      * @return the URL of the document
      */
     public String getUrl() {
@@ -51,6 +56,7 @@ public class Document {
 
     /**
      * Retrieves the content of the document
+     *
      * @return the content of the document
      */
     public String getContent() {
@@ -59,6 +65,7 @@ public class Document {
 
     /**
      * Retrieves the political leaning of the document
+     *
      * @return the political leaning of the document
      */
     public Wing getWing() {
@@ -67,6 +74,7 @@ public class Document {
 
     /**
      * Retrieves the political leaning value of the document
+     *
      * @return the political leaning value of the document
      */
     public Double getWingValue() {

@@ -5,8 +5,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Enum that represents the different political leanings a document can have
+ *
  * @author AveryVine
- * @since 2018-07-15
+ * @since July 2018
  */
 public enum Wing {
     FAR_LEFT("far-left"),
@@ -19,6 +20,7 @@ public enum Wing {
 
     /**
      * Constructs a Wing enum to be a part of the persistent set
+     *
      * @param value the string value of the enum
      */
     Wing(String value) {
@@ -27,6 +29,7 @@ public enum Wing {
 
     /**
      * Converts a string value into a Wing enum, if possible (required by Spring for JSON to POJO conversion)
+     *
      * @param value the string value to convert
      * @return the appropriate Wing enum
      */
@@ -42,6 +45,7 @@ public enum Wing {
 
     /**
      * Converts a Wing enum into its string value (required by Spring for JSON to POJO conversion)
+     *
      * @return the string value of the Wing enum
      */
     @JsonValue

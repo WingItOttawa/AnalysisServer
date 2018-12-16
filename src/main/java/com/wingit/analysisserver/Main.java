@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Entry class for SpringBootApplication
+ *
  * @author AveryVine
- * @since 2018-07-05
+ * @since July 2018
  */
 @SpringBootApplication
 public class Main {
@@ -17,6 +18,7 @@ public class Main {
 
     /**
      * Entry point for SpringBootApplication
+     *
      * @param args optional command line arguments
      */
     public static void main(String[] args) {
